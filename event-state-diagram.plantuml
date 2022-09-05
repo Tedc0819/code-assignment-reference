@@ -1,0 +1,18 @@
+@startuml
+
+(create wallet) --> [WalletState_CREATED]
+(deposit) --> [TransactionRequest_STARTED]
+(transfer) --> [TransactionRequest_STARTED]
+(withdraw) --> [TransactionRequest_STARTED]
+[WalletState_CREATED] --> [WalletState_UPDATED] 
+
+[WalletTransaction_CREATED] --> [TransactionRequest_SUCCESS]
+[WalletState_UPDATED] --> [TransactionRequest_SUCCESS]
+
+[TransactionRequest_STARTED] --> [WalletState_UPDATED]
+[TransactionRequest_STARTED] --> [WalletTransaction_CREATED]
+[TransactionRequest_STARTED] --> [TransactionRequest_SUCCESS]
+
+[TransactionRequest_STARTED] --> [TransactionRequest_FAILURE]
+(error) --> [TransactionRequest_FAILURE]
+@enduml
